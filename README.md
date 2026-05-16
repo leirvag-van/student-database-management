@@ -18,6 +18,14 @@ This project is developed for practicing collaborative web development using Git
 
 ---
 
+##  Purpose
+This project is created for educational purposes to practice:
+- Git workflow
+- Web development using PHP
+- Database integration
+  
+---
+
 ##  GPA & Academic Status Logic
 The system automatically assigns academic status based on GPA:
 
@@ -63,11 +71,6 @@ It is designed to be simple and suitable for deployment on low-resource systems 
 - Add dashboard statistics
 - Improve UI with Bootstrap
 
----
 
-##  Purpose
-This project is created for educational purposes to practice:
-- Git workflow
-- Web development using PHP
-- Database integration
+
 - 3-tier architecture design
