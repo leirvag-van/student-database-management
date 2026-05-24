@@ -74,3 +74,13 @@ It is designed to be simple and suitable for deployment on low-resource systems 
 
 
 - 3-tier architecture design
+
+## File Function
+| File | Function |
+|------|---------|
+| index.php | Display student list |
+| add_student.php | Add new student |
+| config.php | Database connection |
+| style.css | Website styling |
+| database.sql | Database structure |
+| README.md | Project documentation |
