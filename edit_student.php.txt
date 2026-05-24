@@ -1,0 +1,62 @@
+<?php
+include 'db.php';
+
+// Check if ID is provided
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Fetch existing student data
+    $sql = "SELECT * FROM students WHERE id = '$id'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $student = mysqli_fetch_assoc($result);
+    } else {
+        echo "Student not found.";
+        exit();
+    }
+}
+
+// Update student record
+if (isset($_POST['update'])) {
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $course = $_POST['course'];
+
+    $update_sql = "UPDATE students 
+                   SET name='$name', email='$email', course='$course' 
+                   WHERE id='$id'";
+
+    if (mysqli_query($conn, $update_sql)) {
+        echo "Student record updated successfully.";
+    } else {
+        echo "Error updating record: " . mysqli_error($conn);
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student</title>
+</head>
+<body>
+
+<h2>Edit Student Record</h2>
+
+<form method="POST">
+    <label>Name:</label><br>
+    <input type="text" name="name" value="<?php echo $student['name']; ?>" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" value="<?php echo $student['email']; ?>" required><br><br>
+
+    <label>Course:</label><br>
+    <input type="text" name="course" value="<?php echo $student['course']; ?>" required><br><br>
+
+    <button type="submit" name="update">Update Student</button>
+</form>
+
+</body>
+</html>
