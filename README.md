@@ -76,11 +76,23 @@ It is designed to be simple and suitable for deployment on low-resource systems 
 - 3-tier architecture design
 
 ## File Function
-| File | Function |
+| File | Function | 
 |------|---------|
-| index.php | Display student list |
+| index.php | Display student list | 
 | add_student.php | Add new student |
-| config.php | Database connection |
-| style.css | Website styling |
-| database.sql | Database structure |
-| README.md | Project documentation |
+| edit_student.php | Edit existing student information |
+| delete_student.php | Delete student records |
+| config.php | Connect application to MySQL database |
+| style.css | Manage website appearance and styling |
+
+##  Team Members & Responsibilities
+
+| Name | Responsibility |
+|------|---------------|
+| Fray | index.php (Display student list) |
+| Morgan | add_student.php (Add new student) |
+| Soul | edit_student.php (Edit existing student information) |
+| Luyanda | delete_student.php (Delete student records) |
+| Ridho | config.php (Connect application to MySQL database) |
+| Livi | style.css (Website styling) |
+
