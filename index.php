@@ -19,10 +19,10 @@
 
     <table>
         <tr>
-            <th>ID</th>
             <th>Student ID</th>
             <th>Name</th>
             <th>Department</th>
+            <th>GPA</th>
         </tr>
 
         <tr>
