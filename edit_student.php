@@ -1,28 +1,39 @@
 <?php
-include 'db.php';
+include 'config.php';
 
-if (isset($_POST['add'])) {
-    $student_id = $_POST['student_id'];
-    $name       = $_POST['name'];
-    $department = $_POST['department'];
-    $gpa        = $_POST['gpa'];
+// GET student data
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-    // Determine academic status
-    if ($gpa >= 3.5) {
-        $status = 'Excellent';
-    } elseif ($gpa >= 2.0) {
-        $status = 'Good';
-    } else {
-        $status = 'Warning';
+    $stmt = $pdo->prepare("SELECT * FROM students WHERE id = ?");
+    $stmt->execute([$id]);
+    $student = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$student) {
+        echo "Student not found.";
+        exit();
     }
+}
 
-    $sql = "INSERT INTO students (student_id, name, department, gpa, status)
-            VALUES ('$student_id', '$name', '$department', '$gpa', '$status')";
+// UPDATE student
+if (isset($_POST['update'])) {
 
-    if (mysqli_query($conn, $sql)) {
-        echo "Student added successfully. Status: $status";
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $student_id = $_POST['student_id'];
+    $department = $_POST['department'];
+    $gpa = $_POST['gpa'];
+
+    $stmt = $pdo->prepare("
+        UPDATE students 
+        SET name = ?, student_id = ?, department = ?, gpa = ?
+        WHERE id = ?
+    ");
+
+    if ($stmt->execute([$name, $student_id, $department, $gpa, $id])) {
+        echo "Student record updated successfully.";
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "Update failed.";
     }
 }
 ?>
@@ -30,26 +41,30 @@ if (isset($_POST['add'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Student</title>
+    <title>Edit Student</title>
 </head>
 <body>
 
-<h2>Add New Student</h2>
+<h2>Edit Student Record</h2>
 
 <form method="POST">
+
+    <input type="hidden" name="id" value="<?= $student['id'] ?>">
+
     <label>Student ID:</label><br>
-    <input type="text" name="student_id" required><br><br>
+    <input type="text" name="student_id" value="<?= $student['student_id'] ?>"><br><br>
 
     <label>Name:</label><br>
-    <input type="text" name="name" required><br><br>
+    <input type="text" name="name" value="<?= $student['name'] ?>"><br><br>
 
     <label>Department:</label><br>
-    <input type="text" name="department" required><br><br>
+    <input type="text" name="department" value="<?= $student['department'] ?>"><br><br>
 
     <label>GPA:</label><br>
-    <input type="number" name="gpa" step="0.01" min="0" max="4.00" required><br><br>
+    <input type="text" name="gpa" value="<?= $student['gpa'] ?>"><br><br>
 
-    <button type="submit" name="add">Add Student</button>
+    <button type="submit" name="update">Update Student</button>
+
 </form>
 
 </body>
