@@ -1,3 +1,10 @@
+<?php
+include 'config.php';
+
+$stmt = $pdo->query("SELECT * FROM students");
+$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,20 +24,24 @@
 
     <h2>Student List</h2>
 
-    <table>
+    <table border="1">
         <tr>
             <th>Student ID</th>
             <th>Name</th>
             <th>Department</th>
             <th>GPA</th>
+            <th>Status</th>
         </tr>
 
+        <?php foreach ($students as $student): ?>
         <tr>
-            <td>1</td>
-            <td>412000001</td>
-            <td>Kevin</td>
-            <td>Computer Science</td>
+            <td><?= $student['student_id']; ?></td>
+            <td><?= $student['name']; ?></td>
+            <td><?= $student['department']; ?></td>
+            <td><?= $student['gpa']; ?></td>
+            <td><?= $student['status']; ?></td>
         </tr>
+        <?php endforeach; ?>
     </table>
 </div>
 
