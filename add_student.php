@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include 'config.php';
 
 if (isset($_POST['add'])) {
     $student_id = $_POST['student_id'];
