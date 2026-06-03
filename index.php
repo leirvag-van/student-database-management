@@ -24,12 +24,13 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <h2>Student List</h2>
 
-    <table>
+    <table border="1">
         <tr>
             <th>Student ID</th>
             <th>Name</th>
             <th>Department</th>
             <th>GPA</th>
+            <th>Status</th>
         </tr>
 
         <?php foreach ($students as $student): ?>

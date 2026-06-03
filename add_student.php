@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include 'config.php';
 
 if (isset($_POST['add'])) {
     $student_id = $_POST['student_id'];
@@ -16,13 +16,13 @@ if (isset($_POST['add'])) {
         $status = 'Warning';
     }
 
-    $sql = "INSERT INTO students (student_id, name, department, gpa, status)
-            VALUES ('$student_id', '$name', '$department', '$gpa', '$status')";
-
-    if (mysqli_query($conn, $sql)) {
+    $stmt = $pdo->prepare("INSERT INTO students (student_id, name, department, gpa, status)
+                           VALUES (?, ?, ?, ?, ?)");
+ 
+    if ($stmt->execute([$student_id, $name, $department, $gpa, $status])) {
         echo "Student added successfully. Status: $status";
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "Error inserting record.";
     }
 }
 ?>
