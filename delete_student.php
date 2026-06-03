@@ -1,29 +1,26 @@
 <?php
-require_once 'config.php';
+include 'config.php';
 
-function studentExists(mysqli $conn, int $id): bool {
-    $stmt = $conn->prepare("SELECT id FROM students WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $stmt->store_result();
-    $exists = $stmt->num_rows > 0;
-    $stmt->close();
-    return $exists;
-}
+if (isset($_GET['id'])) {
 
-function deleteStudent(mysqli $conn, int $id): string {
-    if (!studentExists($conn, $id)) {
-        return "Error: Student with ID $id does not exist.";
-    }
+    $id = $_GET['id'];
 
-    $stmt = $conn->prepare("DELETE FROM students WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    // Check if student exists
+    $stmt = $pdo->prepare("SELECT id FROM students WHERE id = ?");
+    $stmt->execute([$id]);
 
-    if ($stmt->execute()) {
-        $stmt->close();
-        return "Student with ID $id has been successfully deleted.";
+    if ($stmt->fetch()) {
+
+        // Delete student
+        $stmt = $pdo->prepare("DELETE FROM students WHERE id = ?");
+        $stmt->execute([$id]);
+
+        // Return to main page
+        header("Location: index.php");
+        exit();
+
     } else {
-        $stmt->close();
-        return "Error: Could not delete student. " . $conn->error;
+        echo "Student not found.";
     }
 }
+?>
