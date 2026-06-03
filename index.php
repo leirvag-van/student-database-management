@@ -9,13 +9,13 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Database Management System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
+
     <h1>Student Database Management System</h1>
 
     <p>Welcome to the Student Academic Portal.</p>
@@ -35,14 +35,15 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <?php foreach ($students as $student): ?>
         <tr>
-            <td><?= $student['student_id']; ?></td>
-            <td><?= $student['name']; ?></td>
-            <td><?= $student['department']; ?></td>
-            <td><?= $student['gpa']; ?></td>
-            <td><?= $student['status']; ?></td>
+            <td><?= $student['student_id'] ?></td>
+            <td><?= $student['name'] ?></td>
+            <td><?= $student['department'] ?></td>
+            <td><?= $student['gpa'] ?></td>
         </tr>
         <?php endforeach; ?>
+
     </table>
+
 </div>
 
 </body>

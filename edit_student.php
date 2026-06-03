@@ -1,38 +1,39 @@
-	<?php
-include 'db.php';
+<?php
+include 'config.php';
 
-// Check if ID is provided
+// GET student data
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Fetch existing student data
-    $sql = "SELECT * FROM students WHERE id = '$id'";
-    $result = mysqli_query($conn, $sql);
+    $stmt = $pdo->prepare("SELECT * FROM students WHERE id = ?");
+    $stmt->execute([$id]);
+    $student = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (mysqli_num_rows($result) > 0) {
-        $student = mysqli_fetch_assoc($result);
-    } else {
+    if (!$student) {
         echo "Student not found.";
         exit();
     }
 }
 
-// Update student record
+// UPDATE student
 if (isset($_POST['update'])) {
 
+    $id = $_POST['id'];
     $name = $_POST['name'];
-    $student id = $_POST['student_id'];
+    $student_id = $_POST['student_id'];
     $department = $_POST['department'];
-	$gpa = $_POST['gpa'];
+    $gpa = $_POST['gpa'];
 
-    $update_sql = "UPDATE students 
-                   SET name='$name', student id='$student_id', department='$department', gpa='$gpa'; 
-                   WHERE id='$id'";
+    $stmt = $pdo->prepare("
+        UPDATE students 
+        SET name = ?, student_id = ?, department = ?, gpa = ?
+        WHERE id = ?
+    ");
 
-    if (mysqli_query($conn, $update_sql)) {
+    if ($stmt->execute([$name, $student_id, $department, $gpa, $id])) {
         echo "Student record updated successfully.";
     } else {
-        echo "Error updating record: " . mysqli_error($conn);
+        echo "Update failed.";
     }
 }
 ?>
@@ -47,21 +48,24 @@ if (isset($_POST['update'])) {
 <h2>Edit Student Record</h2>
 
 <form method="POST">
-	<label>Student ID:</label><br>
-    <input type="text" name="student id" value="<?php echo $student['student_id']; ?>" required><br><br>
+
+    <input type="hidden" name="id" value="<?= $student['id'] ?>">
+
+    <label>Student ID:</label><br>
+    <input type="text" name="student_id" value="<?= $student['student_id'] ?>"><br><br>
 
     <label>Name:</label><br>
-    <input type="text" name="name" value="<?php echo $student['name']; ?>" required><br><br>
+    <input type="text" name="name" value="<?= $student['name'] ?>"><br><br>
 
     <label>Department:</label><br>
-    <input type="text" name="deparment" value="<?php echo $student['department']; ?>" required><br><br>
-	
+    <input type="text" name="department" value="<?= $student['department'] ?>"><br><br>
+
     <label>GPA:</label><br>
-	<input type="text" name="gpa" value="<?php echo $student['gpa']; ?>" required><br><br>
+    <input type="text" name="gpa" value="<?= $student['gpa'] ?>"><br><br>
 
     <button type="submit" name="update">Update Student</button>
+
 </form>
 
 </body>
-</html><?php
-include 'db.php';
+</html>
