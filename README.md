@@ -85,14 +85,4 @@ It is designed to be simple and suitable for deployment on low-resource systems 
 | config.php | Connect application to MySQL database |
 | style.css | Manage website appearance and styling |
 
-##  Team Members & Responsibilities
-
-| Name | Responsibility |
-|------|---------------|
-| Fray | index.php (Display student list) |
-| Morgan | add_student.php (Add new student) |
-| Soul | edit_student.php (Edit existing student information) |
-| Luyanda | delete_student.php (Delete student records) |
-| Ridho | config.php (Connect application to MySQL database) |
-| Livi | style.css (Website styling) |
 
