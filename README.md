@@ -26,39 +26,6 @@ This project is created for educational purposes to practice:
   
 ---
 
-##  GPA & Academic Status Logic
-The system automatically assigns academic status based on GPA:
-
-- GPA ≥ 3.5 → Excellent
-- GPA ≥ 2.0 → Good
-- GPA < 2.0 → Warning
-
-This feature helps to quickly identify student performance levels.
-
----
-
-##  Technologies Used
-- PHP (Backend Logic)
-- MySQL (Relational Database)
-- HTML/CSS (Frontend Interface)
-- Git & GitHub (Version Control)
-
----
-
-##  System Architecture
-This project follows the 3-tier architecture model:
-
-1. **Presentation Layer**
-   - HTML/CSS user interface
-
-2. **Logic Layer**
-   - PHP handles data processing and business logic
-
-3. **Data Layer**
-   - MySQL database stores student records
-
----
-
 ##  Target Application
 The target application is a lightweight student management system that can be used to manage academic records efficiently.  
 It is designed to be simple and suitable for deployment on low-resource systems such as Raspberry Pi Zero 2W.
