@@ -110,10 +110,9 @@ The system automatically calculates and displays each student’s academic statu
 
 |GPA Range  |Academic Status        |
 |-----------|-----------------------|
-|3.50 – 4.00|Dean’s List / Excellent|
+|3.50 – 4.00|Excellent|
 |3.00 – 3.49|Good Standing          |
-|2.00 – 2.99|Satisfactory           |
-|Below 2.00 |Academic Probation     |
+|Below 3.00 |Warning     |
 
 
 > **Note:** The exact GPA thresholds may vary depending on the configuration set by the administrator. Refer to `AdminGuide.md` for details on modifying status classifications.
