@@ -175,4 +175,5 @@ For the project demonstration, the application was deployed on a Raspberry Pi Ze
 * MariaDB
 
 The application can operate without Internet access and supports link-local networking as required by the project specification.
+
 For clarification, we added step 3 due to an error that appeared during our testing of the application.
